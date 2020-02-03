@@ -70,7 +70,7 @@ def make_plot(plotmin):
     plot = figure(x_range=[Rmin,Rmax], y_range=[plotmin, 0.001], 
                   x_axis_label="Bond length (R)",
                   y_axis_label="Pair VDW energy (kcal/mol)",
-                  plot_width=700, tools="", toolbar_location=None)
+                  plot_width=700)
     plot.title.text = "Click the legend titles to show/hide individual plots"
 
     x = np.linspace(Rmin,Rmax, 100)
@@ -139,7 +139,7 @@ def update_plot(attr, old, new):
 
 
 # Plot range and resolution settings
-Rmin = 3
+Rmin = 2
 Rmax = 14
 npts = 200
 
