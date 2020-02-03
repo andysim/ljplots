@@ -143,7 +143,7 @@ def update_plot(attr, old, new):
 # Plot range and resolution settings
 Rmin = 2
 Rmax = 14
-npts = 200
+npts = 400
 
 # Initial values to use
 type1 = "SODD";
