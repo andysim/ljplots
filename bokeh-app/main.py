@@ -68,10 +68,12 @@ def compute_reciprocal(Rvals, R6invs, kappa, c6i, c6j):
 
 def make_plot(plotmin):
     plot = figure(x_range=[Rmin,Rmax], y_range=[plotmin, 0.001], 
-                  x_axis_label="Bond length (R)",
+                  x_axis_label="Bond length (A)",
                   y_axis_label="Pair VDW energy (kcal/mol)",
+                  active_scroll="wheel_zoom",
+                  active_drag="pan",
                   plot_width=700)
-    plot.title.text = "Click the legend titles to show/hide individual plots"
+    plot.title.text = "Click legend titles to show/hide individual plots. Use mouse drag/wheel to zoom and navigate."
 
     x = np.linspace(Rmin,Rmax, 100)
     y = np.zeros_like(x)
