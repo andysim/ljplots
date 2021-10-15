@@ -123,24 +123,6 @@ def compute_data(type1, type2, Rcut, Rwin, kappa):
     return data
 
 
-def update_plot(attr, old, new):
-    # Get the various potential functions
-    reset_output()
-    type1 = type1_select.value
-    type2 = type2_select.value
-    Rcut = rcut_slider.value
-    Rwin = rwin_slider.value
-    kappa = kappa_slider.value
-    d = compute_data(type1, type2, Rcut, Rwin, kappa)
-    regularDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['regularlj'])).data
-    switchedDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchedlj'])).data
-    nbfixedDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['nbfixed'])).data
-    switchednbfixDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchednbfix'])).data
-    reciprocaldata.data = ColumnDataSource(data=dict(x=d['RvalsR'], y=d['reciprocal'])).data
-    plot.y_range.start = d['plotmin']
-
-
-
 # Plot range and resolution settings
 Rmin = 2
 Rmax = 14
@@ -159,12 +141,6 @@ rcut_slider = Slider(title="Real space cutoff (A)", value=Rcut, start=Rmin, end=
 rwin_slider = Slider(title="Switching window size (A)", value=Rwin, start=0, end=6, step=0.5)
 kappa_slider = Slider(title="Ewald attenuation parameter (1/A)", value=kappa, start=0, end=1, step=0.01)
 
-type1_select.on_change('value', update_plot)
-type2_select.on_change('value', update_plot)
-rcut_slider.on_change('value', update_plot)
-rwin_slider.on_change('value', update_plot)
-kappa_slider.on_change('value', update_plot)
-
 d = compute_data(type1, type2, Rcut, Rwin, kappa)
 
 regularDdata = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['regularlj']))
@@ -173,6 +149,27 @@ nbfixedDdata = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['nbfixed']))
 switchednbfixDdata = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchednbfix']))
 reciprocaldata = ColumnDataSource(data=dict(x=d['RvalsR'], y=d['reciprocal']))
 plot = make_plot(d['plotmin'])
+
+def update_plot(attr, old, new):
+    # Get the various potential functions
+    type1 = type1_select.value
+    type2 = type2_select.value
+    Rcut = rcut_slider.value
+    Rwin = rwin_slider.value
+    kappa = kappa_slider.value
+    d = compute_data(type1, type2, Rcut, Rwin, kappa)
+    regularDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['regularlj'])).data
+    switchedDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchedlj'])).data
+    nbfixedDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['nbfixed'])).data
+    switchednbfixDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchednbfix'])).data
+    reciprocaldata.data = ColumnDataSource(data=dict(x=d['RvalsR'], y=d['reciprocal'])).data
+    plot.y_range.start = d['plotmin']
+
+type1_select.on_change('value', update_plot)
+type2_select.on_change('value', update_plot)
+rcut_slider.on_change('value', update_plot)
+rwin_slider.on_change('value', update_plot)
+kappa_slider.on_change('value', update_plot)
 
 controls = column(type1_select, type2_select, rcut_slider, rwin_slider, kappa_slider)
 curdoc().add_root(row(plot, controls))
