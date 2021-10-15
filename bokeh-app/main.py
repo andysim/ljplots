@@ -125,6 +125,7 @@ def compute_data(type1, type2, Rcut, Rwin, kappa):
 
 def update_plot(attr, old, new):
     # Get the various potential functions
+    reset_output()
     type1 = type1_select.value
     type2 = type2_select.value
     Rcut = rcut_slider.value
