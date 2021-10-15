@@ -158,11 +158,11 @@ def update_plot(attr, old, new):
     Rwin = rwin_slider.value
     kappa = kappa_slider.value
     d = compute_data(type1, type2, Rcut, Rwin, kappa)
-    regularDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['regularlj'])).data
-    switchedDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchedlj'])).data
-    nbfixedDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['nbfixed'])).data
-    switchednbfixDdata.data = ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchednbfix'])).data
-    reciprocaldata.data = ColumnDataSource(data=dict(x=d['RvalsR'], y=d['reciprocal'])).data
+    regularDdata.data = dict(ColumnDataSource(data=dict(x=d['RvalsD'], y=d['regularlj'])).data)
+    switchedDdata.data = dict(ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchedlj'])).data)
+    nbfixedDdata.data = dict(ColumnDataSource(data=dict(x=d['RvalsD'], y=d['nbfixed'])).data)
+    switchednbfixDdata.data = dict(ColumnDataSource(data=dict(x=d['RvalsD'], y=d['switchednbfix'])).data)
+    reciprocaldata.data = dict(ColumnDataSource(data=dict(x=d['RvalsR'], y=d['reciprocal'])).data)
     plot.y_range.start = d['plotmin']
 
 type1_select.on_change('value', update_plot)
